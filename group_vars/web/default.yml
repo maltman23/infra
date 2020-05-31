@@ -1,0 +1,13 @@
+---
+letsencrypt_email: mitch@cornfieldelectronics.com
+caddy_update: true
+caddy_systemd_capabilities_enabled: true
+caddy_systemd_restart_startlimitinterval: 3600
+caddy_features: http.prometheus
+caddy_config: |
+  mitchaltman.org {
+    ext .html
+    root /var/www/
+    prometheus
+    tls {{ letsencrypt_email }}
+  }
