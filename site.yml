@@ -12,6 +12,7 @@
   become: true
   roles:
   - caddy_ansible.caddy_ansible
+  - mitchaltman.org
   pre_tasks:
   - name: create directories
     file:
@@ -19,4 +20,3 @@
       state: directory
     with_items:
     - /var/www
-
