@@ -7,10 +7,13 @@
     - common
 
 - name: Setup HTTP server
-  hosts: web
+  hosts: iocoop
+  tags: [web]
+  become: true
   roles:
   - caddy_ansible.caddy_ansible
   pre_tasks:
+  - name: create directories
     file:
       path: "{{ item }}"
       state: directory
