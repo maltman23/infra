@@ -1,0 +1,59 @@
+---
+- name: install Ansilbe key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 93C4A3FD7BB9C367
+
+- name: install Ansible repo
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main
+
+- name: install packages
+  apt:
+    state: latest
+    install_recommends: no
+    package:
+    - ack-grep
+    - ansible
+    - apt-transport-https
+    - bash-completion
+    - ca-certificates
+    - file
+    - git
+    - gpg
+    - htop
+    - iftop
+    - inotify-tools
+    - iotop
+    - less
+    - libcap2-bin
+    - lsof
+    - mediainfo
+    - mosh
+    - mtr-tiny
+    - netcat-openbsd
+    - screen
+    - strace
+    - sudo
+    - tcpdump
+    - ufw
+    - vim
+    - vnstat
+
+- name: Remove dependencies that are no longer required
+  apt:
+    purge: yes
+    autoremove: yes
+
+
+- name: "Add root screenrc"
+  copy:
+    src: screenrc
+    dest: /root/.screenrc
+
+- name: Setup sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^%sudo"
+    line: "%sudo	ALL=(ALL:ALL) NOPASSWD: ALL"
+    state: present
