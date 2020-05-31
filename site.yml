@@ -5,3 +5,15 @@
   become: true
   roles:
     - common
+
+- name: Setup HTTP server
+  hosts: web
+  roles:
+  - caddy_ansible.caddy_ansible
+  pre_tasks:
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - /var/www
+
