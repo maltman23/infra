@@ -1,0 +1,5 @@
+---
+- name: copy index
+  copy:
+    src: index.html
+    dest: /var/www/index.html
