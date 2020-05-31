@@ -1,0 +1,7 @@
+---
+- name: common roles
+  hosts: all
+  tags: [common]
+  become: true
+  roles:
+    - common
