@@ -1,0 +1,10 @@
+---
+users:
+  mitch:
+    fullname: Mitch Altman
+    email: mitch@cornfieldelectronics.com
+    github_username: maltman23
+  ben:
+    fullname: Ben Kochie
+    email: ben@nerp.net
+    github_username: superq

@@ -1,0 +1,30 @@
+---
+- name: add users
+  user:
+    name: "{{ item.key }}"
+    comment: "{{ item.value.fullname }}"
+    shell: "{{ item.value.shell | default('/bin/bash') }}"
+    groups: sudo
+    append: yes
+  with_dict: "{{ users }}"
+
+- name: add authorized keys
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ item.value.ssh_keys | join('\n') }}"
+  with_dict: "{{ users }}"
+  when: item.value.ssh_keys is defined
+
+- name: add github ssh keys
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "https://github.com/{{ item.value.github_username }}.keys"
+  with_dict: "{{ users }}"
+  when: item.value.github_username is defined
+
+- name: add gitlab ssh keys
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "https://gitlab.com/{{ item.value.gitlab_username }}.keys"
+  with_dict: "{{ users }}"
+  when: item.value.gitlab_username is defined
